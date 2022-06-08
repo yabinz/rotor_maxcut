@@ -1,0 +1,70 @@
+---
+
+
+# new output directory
+logdir: './logs_gl/'
+
+# # output directory
+
+# # tensorflow log is created inside <logdir_root>/[<logdir_prefix>_]<timestamp>/
+# logdir_root: './tensorboard/'
+# logdir_prefix: ''
+
+
+# debug mode: solves the quantum harmonic oscillator
+# !!! Most likeliy won't work with recent changes
+debug: False
+
+# RBM parameters
+num_visible: 4
+num_hidden: 4
+
+# Hamiltonian is given by
+#
+#   H = -\frac{U}{2} \sum_{j = 1}^d \frac{\partial^2}{\partial \theta_j^2}
+#       - 2 \sum_{(j, k) \in E} G_{jk} \cos(\theta_j - \theta_k)
+#
+# In network specifications, edges are specified by the boundary nodes (j, k)
+# and interaction strength G_jk
+#
+
+# max cut value = 21, one side of the cut is 0 3 4 - from BiqMac
+#
+U: 0.0
+edges:
+- j: 0
+  k: 1
+  G: -2.0
+- j: 1
+  k: 2
+  G: -2.0
+- j: 2
+  k: 3
+  G: -2.0
+
+
+# Gradient descent parmeters
+num_step: 500
+lr: 1.0e-02
+
+# SR parameters
+sr_reg: 1.0e-06
+
+# HMC parameters
+leapfrog_step: 0.01
+
+# Adam parameters (deprecated)
+beta_1: 0.9
+beta_2: 0.999
+epsilon: 1.0e-08
+
+# Metropolis parameters
+metropolis_steps: 40
+bump_size: 3.5
+warm_steps: 0
+
+# flag: <0 initialize with BMZ, =N (>0) initialize with given nqs from step N, =0 initialize with random
+flag_initialize: 0
+
+weights_std: 1.0e-01
+bias_scalar: 1.0e+02 

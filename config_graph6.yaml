@@ -1,0 +1,192 @@
+---
+
+
+# new output directory
+logdir: './logs_gl/'
+
+# # output directory
+
+# # tensorflow log is created inside <logdir_root>/[<logdir_prefix>_]<timestamp>/
+# logdir_root: './tensorboard/'
+# logdir_prefix: ''
+
+
+# debug mode: solves the quantum harmonic oscillator
+# !!! Most likeliy won't work with recent changes
+debug: False
+
+# RBM parameters
+num_visible: 12
+num_hidden: 12
+
+# Hamiltonian is given by
+#
+#   H = -\frac{U}{2} \sum_{j = 1}^d \frac{\partial^2}{\partial \theta_j^2}
+#       - 2 \sum_{(j, k) \in E} G_{jk} \cos(\theta_j - \theta_k)
+#
+# In network specifications, edges are specified by the boundary nodes (j, k)
+# and interaction strength G_jk
+#
+# The following specification represents a 6 nodes graph :
+# max cut value = 21, one side of the cut is 0 3 4 - from BiqMac
+#
+U: 0.0
+edges:
+- j: 0
+  k: 1
+  G: -1.0
+- j: 0
+  k: 10
+  G: -2.0
+- j: 1
+  k: 2
+  G: -0.5
+- j: 1
+  k: 10
+  G: -2.5
+- j: 2
+  k: 3
+  G: -4.0
+- j: 2
+  k: 8
+  G: -5.5
+- j: 2
+  k: 9
+  G: -3.5
+- j: 2
+  k: 10
+  G: -4.5
+- j: 3
+  k: 4
+  G: -1.5
+- j: 3
+  k: 7
+  G: -3.5
+- j: 4
+  k: 5
+  G: -4.5
+- j: 5
+  k: 7
+  G: -3.0
+- j: 5
+  k: 6
+  G: -3.0
+- j: 6
+  k: 10
+  G: -7.0
+- j: 7
+  k: 8
+  G: -1.5
+- j: 7
+  k: 9
+  G: -6.0
+- j: 0
+  k: 5
+  G: -1.5
+- j: 0
+  k: 2
+  G: -5.5
+- j: 2
+  k: 4
+  G: -1.5
+- j: 2
+  k: 6
+  G: -3.5
+- j: 3
+  k: 5 
+  G: -2.0
+- j: 3
+  k: 8
+  G: -0.5
+- j: 6
+  k: 7
+  G: -1.0
+- j: 6
+  k: 0
+  G: -2.0
+- j: 8
+  k: 9
+  G: -2.0
+- j: 1
+  k: 8
+  G: -3.5
+- j: 2
+  k: 11
+  G: -2.5
+- j: 5
+  k: 11
+  G: -0.5
+- j: 6
+  k: 11
+  G: -1.0
+- j: 4
+  k: 9 
+  G: -1.5
+- j: 8
+  k: 10
+  G: -0.5
+- j: 10
+  k: 11
+  G: -1.5
+- j: 2
+  k: 5
+  G: -0.5
+- j: 1
+  k: 6
+  G: -2.5
+- j: 1
+  k: 7
+  G: -1.5
+- j: 3
+  k: 9
+  G: -2.0
+- j: 0
+  k: 11
+  G: -3.5
+- j: 0
+  k: 8
+  G: -1.5
+- j: 4
+  k: 11
+  G: -1.5
+- j: 0
+  k: 4
+  G: -1.0
+- j: 9
+  k: 11
+  G: -1.5
+- j: 8
+  k: 11
+  G: -3.0
+- j: 1
+  k: 3
+  G: -1.5
+- j: 3
+  k: 10
+  G: -3.0
+
+# Gradient descent parmeters
+num_step: 1200
+lr: 1.0e-02
+
+# SR parameters
+sr_reg: 1.0e-06
+
+# HMC parameters
+leapfrog_step: 0.01
+
+# Adam parameters (deprecated)
+beta_1: 0.9
+beta_2: 0.999
+epsilon: 1.0e-08
+
+# Metropolis parameters
+metropolis_steps: 40
+bump_size: 3.5
+warm_steps: 0
+
+# flag: <0 initialize with BMZ, =N (>0) initialize with given nqs from step N, =0 initialize with random
+flag_initialize: 0
+
+weights_std: 1.0e-01
+bias_scalar: 1.0e+02 
